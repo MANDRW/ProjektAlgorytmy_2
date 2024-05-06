@@ -4,4 +4,4 @@ project(PIAA_Proj2)
 set(CMAKE_CXX_STANDARD 14)
 
 add_executable(PIAA_Proj2
-        main.cpp)
+        main.cpp graph_matrix.h graph_list.h edge.h graph_list.cpp)
