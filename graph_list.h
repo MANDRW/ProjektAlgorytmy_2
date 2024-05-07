@@ -11,7 +11,7 @@ class GraphList{
         GraphList(int V);
         void incidentEdges(int v);
         bool areAdjacent(int v, int u);
-        void insertVertex(int w);
+        void insertVertex();
         void insertEdge(int v, int u, int w);
         void removeEdge(int v, int u);
         void removeVertex(int e);

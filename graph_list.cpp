@@ -21,17 +21,18 @@ bool GraphList::areAdjacent(int v, int u){
     return 0;
 }
 
-void GraphList::insertVertex(int o){
+void GraphList::insertVertex(){
     list.push_back(std::vector<edge>());
     V++;
 }
 
 void GraphList::insertEdge(int v, int u, int w){
-    edge e;
-    e.v = v;
-    e.w = w;
-    list[v].push_back(e);
-    list[u].push_back(e);
+    edge e1,e2;
+    e1.v = v;
+    e2.v = u;
+    e1.w=e2.w=w;
+    list[v].push_back(e2);
+    list[u].push_back(e1);
 }
 
 void GraphList::removeEdge(int v, int u){
@@ -63,9 +64,9 @@ void GraphList::removeVertex(int u){
 
 void GraphList::printGraph(){
     for(int i = 0; i < V; i++){
-        std::cout << "Vertex " << i << ": ";
+        std::cout << "Wierzcholek " << i << ": ";
         for(int j = 0; j < list[i].size(); j++){
-            std::cout << list[i][j].v << " " << list[i][j].w << " ";
+            std::cout <<"krawedz: "<< list[i][j].v << " waga: " << list[i][j].w << " ";
         }
         std::cout << std::endl;
     }
