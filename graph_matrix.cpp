@@ -44,3 +44,4 @@ void GraphMatrix::printGraph() {
                 std::cout << "Wierzcholek " << i << " krawedz do wierzcholka " << j << " o wadze " << matrix[i][j] << std::endl;
 
 }
+

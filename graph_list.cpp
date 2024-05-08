@@ -1,5 +1,9 @@
 #include "graph_list.h"
 #include<iostream>
+#include <queue>
+#include <vector>
+
+using namespace std;
 
 GraphList::GraphList(int V){
     this->V = V;
@@ -8,7 +12,7 @@ GraphList::GraphList(int V){
 
 void GraphList::incidentEdges(int v){
     for(int i = 0; i < list[v].size(); i++){
-        std::cout << "Krawedzie incydentne wierzcholka" <<v<< list[v][i].v << " waga: " << list[v][i].w << std::endl;
+        cout << "Krawedzie incydentne wierzcholka" <<v<< list[v][i].v << " waga: " << list[v][i].w << std::endl;
     }
 }
 
@@ -64,10 +68,32 @@ void GraphList::removeVertex(int u){
 
 void GraphList::printGraph(){
     for(int i = 0; i < V; i++){
-        std::cout << "Wierzcholek " << i << ": ";
+        cout << "Wierzcholek " << i << ": ";
         for(int j = 0; j < list[i].size(); j++){
-            std::cout <<"krawedz: "<< list[i][j].v << " waga: " << list[i][j].w << " ";
+            cout <<"krawedz: "<< list[i][j].v << " waga: " << list[i][j].w << " ";
         }
-        std::cout << std::endl;
+        cout<<endl;
     }
+}
+
+int GraphList::dijkstra(int start, int end){
+    vector<int> route(V, INT_MAX);
+    route[start] = 0;
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> queue;
+    queue.push(make_pair(0, start));
+    while(queue.empty()!=1){
+        int u = queue.top().second;
+        queue.pop();
+        if(u == end) return route[u];
+
+        for (int i = 0; i < list[u].size(); i++) {
+            int v = list[u][i].v;
+            unsigned w = list[u][i].w;
+            if (route[v] > route[u] + w) {
+                route[v] = route[u] + w;
+                queue.push(make_pair(route[v], v));
+            }
+        }
+    }
+    return -1;
 }

@@ -16,5 +16,6 @@ class GraphList{
         void removeEdge(int v, int u);
         void removeVertex(int e);
         void printGraph();
+        int dijkstra(int start, int end);
 };
 #endif

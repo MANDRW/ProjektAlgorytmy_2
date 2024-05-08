@@ -14,5 +14,6 @@ class GraphMatrix{
         void removeEdge(int v, int u);
         void removeVertex(int v);
         void printGraph();
+        int Dikstra(int start, int end);
 };
 #endif
