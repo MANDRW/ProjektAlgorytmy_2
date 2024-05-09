@@ -12,8 +12,7 @@ class GraphMatrix{
         void insertVertex();
         void insertEdge(int v, int u, int w);
         void removeEdge(int v, int u);
-        void removeVertex(int v);
         void printGraph();
-        int Dikstra(int start, int end);
+        int dijkstra(int start, int end);
 };
 #endif

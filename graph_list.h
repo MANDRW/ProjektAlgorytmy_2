@@ -14,7 +14,6 @@ class GraphList{
         void insertVertex();
         void insertEdge(int v, int u, int w);
         void removeEdge(int v, int u);
-        void removeVertex(int e);
         void printGraph();
         int dijkstra(int start, int end);
 };

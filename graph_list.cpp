@@ -54,17 +54,6 @@ void GraphList::removeEdge(int v, int u){
     }
 }
 
-void GraphList::removeVertex(int u){
-    list.erase(list.begin() + u);
-    V--;
-    for(int i = 0; i < V; i++){
-        for(int j = 0; j < list[i].size(); j++){
-            if(list[i][j].v == u){
-                list[i].erase(list[i].begin() + j);
-            }
-        }
-    }
-}
 
 void GraphList::printGraph(){
     for(int i = 0; i < V; i++){
@@ -88,12 +77,12 @@ int GraphList::dijkstra(int start, int end){
 
         for (int i = 0; i < list[u].size(); i++) {
             int v = list[u][i].v;
-            unsigned w = list[u][i].w;
+            unsigned int w = list[u][i].w;
             if (route[v] > route[u] + w) {
                 route[v] = route[u] + w;
                 queue.push(make_pair(route[v], v));
             }
         }
     }
-    return -1;
+    return -1;//start doesn't have a path to end
 }
