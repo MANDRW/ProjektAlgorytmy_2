@@ -11,7 +11,7 @@
 using namespace std;
 
 int main(){
-    srand(time(NULL));
+    /*srand(time(NULL));
       int size_graph=1000;//10,50,100,500,1000
       float prct=1;//0.25,0.5,0.75,1.0;
       vector<pair<int,int>> data;
@@ -88,8 +88,8 @@ cout<<size_graph<<" wierzcholkow"<<endl<<"wypelnienie " <<prct*100<<"%"<<endl;
     end = std::chrono::high_resolution_clock::now();
     time = std::chrono::duration_cast<std::chrono::nanoseconds >(end - begin);
     cout<<"macierz all czas: "<<time.count()/q<<" ns"<<endl;
-
-   // ui();
+*/
+    ui();
 
 
     return 0;
