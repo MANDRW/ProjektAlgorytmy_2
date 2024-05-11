@@ -16,14 +16,7 @@ void GraphList::incidentEdges(int v){
     }
 }
 
-bool GraphList::areAdjacent(int v, int u){
-    for(int i = 0; i < list[u].size(); i++){
-        if(list[u][i].v == v){
-            return 1;
-        }
-    }
-    return 0;
-}
+
 
 void GraphList::insertVertex(){
     list.push_back(std::vector<edge>());
@@ -59,7 +52,7 @@ void GraphList::printGraph(){
     for(int i = 0; i < V; i++){
         cout << "Wierzcholek " << i << ": ";
         for(int j = 0; j < list[i].size(); j++){
-            cout <<"krawedz: "<< list[i][j].v << " waga: " << list[i][j].w << " ";
+            cout <<"krawedz do wierzcholka: "<< list[i][j].v << " waga: " << list[i][j].w << " ";
         }
         cout<<endl;
     }
@@ -85,4 +78,31 @@ int GraphList::dijkstra(int start, int end){
         }
     }
     return -1;//start doesn't have a path to end
+}
+
+vector<int> GraphList::dijkstra_all(int start) {
+    vector<int> route(V, INT_MAX);
+    route[start] = 0;
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> queue;
+    queue.push(make_pair(0, start));
+    while (!queue.empty()) {
+        int u = queue.top().second;
+        int w = queue.top().first;
+        queue.pop();
+        if (route[u] < w) continue;
+        for (int i = 0; i < list[u].size(); i++) {
+            int v = list[u][i].v;
+            int weight_uv = list[u][i].w;
+            if (route[v] > route[u] + weight_uv) {
+                route[v] = route[u] + weight_uv;
+                queue.push(make_pair(route[v], v));
+            }
+        }
+    }
+    return route;
+}
+
+
+int GraphList::getV(){
+    return V;
 }

@@ -7,12 +7,13 @@
 #include <vector>
 #include "graph_list.h"
 #include "graph_matrix.h"
+#include "ui.h"
 using namespace std;
 
 int main(){
     srand(time(NULL));
-      int size_graph=10;//10,50,100,500,1000
-      float prct=0.25;//0.25,0.5,0.75,1.0;
+      int size_graph=1000;//10,50,100,500,1000
+      float prct=1;//0.25,0.5,0.75,1.0;
       vector<pair<int,int>> data;
       int q=100;
       fstream file;
@@ -26,7 +27,7 @@ int main(){
     }
     cout<<"stworzono grafy"<<endl;
 
-      file.open("graph_edges_10.txt",ios::in);
+      file.open("graph_edges_1000.txt",ios::in);//plik
       for (int i = 0;!file.eof(); i++) {
           string t1,t2;
           int s, e;
@@ -52,6 +53,7 @@ cout<<size_graph<<" wierzcholkow"<<endl<<"wypelnienie " <<prct*100<<"%"<<endl;
 
 //list
     int temp;
+    vector<int>temp2;
       auto begin = std::chrono::high_resolution_clock::now();
       for(int i=0;q>i;i++){
           temp=tab[i].dijkstra(0,(rand()%(size_graph-1))+1);
@@ -59,6 +61,15 @@ cout<<size_graph<<" wierzcholkow"<<endl<<"wypelnienie " <<prct*100<<"%"<<endl;
       auto end = std::chrono::high_resolution_clock::now();
       auto time = std::chrono::duration_cast<std::chrono::nanoseconds >(end - begin);
        cout<<"lista czas "<<time.count()/q<<" ns"<<endl;
+
+    //list_all
+    begin = std::chrono::high_resolution_clock::now();
+    for(int i=0;q>i;i++){
+        temp2=tab[i].dijkstra_all(0);
+    }
+    end = std::chrono::high_resolution_clock::now();
+    time = std::chrono::duration_cast<std::chrono::nanoseconds >(end - begin);
+    cout<<"lista all czas: "<<time.count()/q<<" ns"<<endl;
 
      //matrix
       begin = std::chrono::high_resolution_clock::now();
@@ -69,7 +80,16 @@ cout<<size_graph<<" wierzcholkow"<<endl<<"wypelnienie " <<prct*100<<"%"<<endl;
       time = std::chrono::duration_cast<std::chrono::nanoseconds >(end - begin);
       cout<<"macierz czas: "<<time.count()/q<<" ns"<<endl;
 
+    //matrix_all
+    begin = std::chrono::high_resolution_clock::now();
+    for(int i=0;q>i;i++){
+        temp2=tab2[i].dijkstra_all(0);
+    }
+    end = std::chrono::high_resolution_clock::now();
+    time = std::chrono::duration_cast<std::chrono::nanoseconds >(end - begin);
+    cout<<"macierz all czas: "<<time.count()/q<<" ns"<<endl;
 
+   // ui();
 
 
     return 0;

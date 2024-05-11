@@ -10,10 +10,12 @@ GraphMatrix::GraphMatrix(int V){
     matrix.resize(V, vector<int>(V, 0));
 }
 
+
+
 void GraphMatrix::incidentEdges(int v){
     for(int i = 0; i < V; i++){
         if(matrix[v][i] != 0){
-            std::cout << "Krawedzie incydentne wierzcholka" <<v<<" i "<<i <<" waga: " << matrix[v][i] << std::endl;
+            std::cout << "Krawedzie incydentne wierzcholka" <<v<<" i "<<i <<" waga: " << matrix[v][i] <<endl;
         }
     }
 }
@@ -41,7 +43,7 @@ void GraphMatrix::printGraph() {
     for(int i=0;i<V;i++)
         for(int j=0;j<V;j++)
             if(matrix[i][j]!=0)
-                std::cout << "Wierzcholek " << i << " krawedz do wierzcholka " << j << " o wadze " << matrix[i][j] << std::endl;
+                std::cout << "Wierzcholek " << i << " krawedz do wierzcholka " << j << " o wadze " << matrix[i][j] <<endl;
 
 }
 
@@ -65,6 +67,35 @@ int GraphMatrix::dijkstra(int start, int end){
             }
         }
     }
-    return -1;//start doesn't have a path to end
+    return -1;
+}
+vector<int> GraphMatrix::dijkstra_all(int start) {
+    vector<int> route(V, INT_MAX);
+    route[start] = 0;
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> queue;
+    queue.push(make_pair(0, start));
+
+    while (!queue.empty()) {
+        int u = queue.top().second;
+        int w = queue.top().first;
+        queue.pop();
+
+        if (route[u] < w) continue;
+
+        for (int i = 0; i < V; i++) {
+            if (matrix[u][i] != 0) {
+                int weight = matrix[u][i];
+                if (route[i] > route[u] + weight) {
+                    route[i] = route[u] + weight;
+                    queue.push({ route[i], i });
+                }
+            }
+        }
+    }
+    return route;
 }
 
+
+int GraphMatrix::getV(){
+    return V;
+}
